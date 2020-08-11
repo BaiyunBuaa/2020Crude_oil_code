@@ -1,7 +1,6 @@
-# text_based_crude_price_forecast
-=================================
+# Text-based crude oil price forecasting
 
-Look 'relationship_code_data.png' for instruction.
+This project contains the Python and R codes for forecasting crude oil price based on news headlines.
 
 ##111
 -----------

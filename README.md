@@ -22,7 +22,14 @@ pip install statsmodels==0.11.1
 
 Python and R files
 ---------
-- `spider`
+- `spider.py`: It is used to obtain future-related news headlines from the website investing.com.
+- `Text2vector.py`: This file can transform the texts into vectors with GloVe.
+- `senti.py`: It is used to calculate the sentiment intensity of the news headlines.
+- `SeaNMF-master/data_preprocess.py`: It is used to preprocess texts for SeaNMF topic model.
+- `SeaNMF-master/train.py`: It can train SeaNMF topic model for short texts. After this step, H matrix can be found in `seanmf_results/`.
+- `SeaNMF-master/LDA_PMI.py`: This file is used to compare the results of LDA and SeaNMF with the PMI score.
+- `preprocess_combine.py`: It is used to combine all the features for forecasting.
+- `VAR.R`: In this file, one can judge if a time series is stationary or not, and select the lags for each time series.
+- `tsforecast.py`: Feature selection, forecasting model construction, forecasting evaluation are all completed in this file.
 
-- huhn
 

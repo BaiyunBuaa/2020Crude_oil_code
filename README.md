@@ -5,6 +5,10 @@ This project contains the Python and R codes for forecasting crude oil price bas
 ![](relationship_code_data.png)
 
 Following the above flowchart, one can complete the basic forecasting steps.
+Authors
+-------
+-   [Yun Bai]
+-   [Xixi Li](https://xixili-2.wixsite.com/personal)
 
 Dependency packages
 -----------
@@ -31,5 +35,11 @@ Python and R files
 - `preprocess_combine.py`: It is used to combine all the features for forecasting.
 - `VAR.R`: In this file, one can judge if a time series is stationary or not, and select the lags for each time series.
 - `tsforecast.py`: Feature selection, forecasting model construction, forecasting evaluation are all completed in this file.
+
+References
+----------
+
+- Yun Bai, Xixi Li*, Hao Yu and Suling Jia. (2020). Text-based crude oil price forecasting.  [Paper on arxiv](https://arxiv.org/abs/2002.02010).
+
 
 

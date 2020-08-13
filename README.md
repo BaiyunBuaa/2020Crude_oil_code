@@ -5,9 +5,10 @@ This project contains the Python and R codes for forecasting crude oil price bas
 ![](relationship_code_data.png)
 
 Following the above flowchart, one can complete the basic forecasting steps.
+
 Authors
 -------
--   [Yun Bai]
+-   Yun Bai
 -   [Xixi Li](https://xixili-2.wixsite.com/personal)
 
 Dependency packages

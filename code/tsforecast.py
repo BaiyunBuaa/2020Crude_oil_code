@@ -62,6 +62,8 @@ def concat_feature(lag_dict,wedata):
     j = 1
     frame = []
     for key in lag_dict:
+        if len(lag_dict) == 1:
+            j = 6
         lag = lag_dict[key]
         ts = wedata[key].tolist()
         feature = series_to_supervised(ts,lag)
@@ -164,14 +166,14 @@ def MAPE(l1,l2):
     mape = sum(np.abs((l1-l2)/l1))/n
     return mape
 
-def get_feature_num_arimax(values,df,ta_X,ta_y,step):
+def get_feature_num_arimax(values,df,ta_X,ta_y): # using decision tree for arima
     lg = DecisionTreeRegressor()
     
     rmselist = []
     maelist = []
     mapelist = []
     size = int(len(values)*(2/3))
-    for i in range(3,len(df.columns)):
+    for i in range(2,len(df.columns)+1):
         fl = ChooseFeature(i,df,ta_X,ta_y)
         XV = get_data(fl,values)
         
@@ -180,7 +182,7 @@ def get_feature_num_arimax(values,df,ta_X,ta_y,step):
         result = XV[:,:-1]
         lg.fit(result[:size], Y0[:size])
         for j in tqdm(range(size, len(Y0))):                 
-            y_pred.append(lg.predict(result[j-step+1, :].reshape((1, -1)))[0])
+            y_pred.append(lg.predict(result[j, :].reshape((1, -1)))[0])
         rmse = RMSE(list(Y0[size:]),y_pred)
         rmselist.append(rmse)
         mae = MAE(list(Y0[size:]),y_pred)
@@ -208,12 +210,14 @@ def get_feature_num_arimax(values,df,ta_X,ta_y,step):
     num = newlist.index(min(newlist))+2
     return ChooseFeature(num,df,ta_X,ta_y)
     
-
-def Regress(model,df,values,ta_X,ta_y,step):
+#这里也需要调整
+def Regress(model,df,values,ta_X,ta_y):
     rmselist = []
     maelist = []
     mapelist = []
     size = int(len(values)*(2/3))
+    
+    print('############# step = 1 #################')
     for i in range(2,len(df.columns)+1):
         fl = ChooseFeature(i,df,ta_X,ta_y)
         XV = get_data(fl,values)
@@ -223,7 +227,7 @@ def Regress(model,df,values,ta_X,ta_y,step):
         result = XV[:,:-1]
         model.fit(result[:size], Y0[:size])
         for j in tqdm(range(size, len(Y0))):                    
-            y_pred.append(model.predict(result[j-step+1, :].reshape((1, -1)))[0])
+            y_pred.append(model.predict(result[j, :].reshape((1, -1)))[0])
         rmse = RMSE(list(Y0[size:]),y_pred)
         rmselist.append(rmse)
         mae = MAE(list(Y0[size:]),y_pred)
@@ -250,31 +254,67 @@ def Regress(model,df,values,ta_X,ta_y,step):
     index = newlist.index(min(newlist))
     num = index+2
     
+    print('step = 0, the rmse, mae and mape are representively:', rmselist[index],maelist[index],mapelist[index])
+    
     #save model
     fl = ChooseFeature(num,df,ta_X,ta_y)
     print(fl)
     XV = get_data(fl,values)    
-    y_pred = []
+    y_pred_h1, y_pred_h2, y_pred_h3 = [],[],[]   #multi-step forecasting
     Y0 = XV[:,-1]
     result = XV[:,:-1]    
     Model = model.fit(result[:size], Y0[:size])
-
+    
+    step = 1
     for j in tqdm(range(size, len(Y0))): 
-        ada.fit(result[:j], Y0[:j])
-        y_pred.append(Model.predict(result[j-step+1, :].reshape((1, -1)))[0])
+#        ada.fit(result[:j], Y0[:j])
+        y_pred_h1.append(Model.predict(result[j-step, :].reshape((1, -1)))[0])
+    
+    rmse_h1 = RMSE(list(Y0[size:]),y_pred_h1)
+    mae_h1 = MAE(list(Y0[size:]),y_pred_h1)
+    mape_h1 = MAPE(list(Y0[size:]),y_pred_h1)
+    print('rmse_h1 = ',rmse_h1)
+    print('mae_h1 = ', mae_h1)
+    print('mape_h1 = ',mape_h1)
+    
+    print('############# step = 2 #################')
+    step = 2
+    for j in tqdm(range(size, len(Y0))): 
+#        ada.fit(result[:j], Y0[:j])
+        y_pred_h2.append(Model.predict(result[j-step, :].reshape((1, -1)))[0])
+        
+    rmse_h2 = RMSE(list(Y0[size:]),y_pred_h2)
+    mae_h2 = MAE(list(Y0[size:]),y_pred_h2)
+    mape_h2 = MAPE(list(Y0[size:]),y_pred_h2)
+    print('rmse_h2 = ',rmse_h2)
+    print('mae_h2 = ', mae_h2)
+    print('mape_h2 = ',mape_h2)
+        
+    print('############# step = 3 #################')
+    step = 3
+    for j in tqdm(range(size, len(Y0))): 
+#        ada.fit(result[:j], Y0[:j])
+        y_pred_h3.append(Model.predict(result[j-step, :].reshape((1, -1)))[0])
+        
+    rmse_h3 = RMSE(list(Y0[size:]),y_pred_h3)
+    mae_h3 = MAE(list(Y0[size:]),y_pred_h3)
+    mape_h3 = MAPE(list(Y0[size:]),y_pred_h3)
+    print('rmse_h3 = ',rmse_h3)
+    print('mae_h3 = ', mae_h3)
+    print('mape_h3 = ',mape_h3)
         
     #Draw true and predicted values
-    new_y_pred = [None]*(len(Y0)-len(y_pred))+y_pred
-    plt.figure(figsize=(12, 4))
-    plt.grid(c='r',ls='--')
-    plt.plot(Y0,'b',label='real')
-    plt.plot(new_y_pred,'g',label='pre')
-    plt.title('Prediction results')
-    plt.xlabel('date')
-    plt.ylabel('price')
-    plt.show() 
+#    new_y_pred = [None]*(len(Y0)-len(y_pred))+y_pred
+#    plt.figure(figsize=(12, 4))
+#    plt.grid(c='r',ls='--')
+#    plt.plot(Y0,'b',label='real')
+#    plt.plot(new_y_pred,'g',label='pre')
+#    plt.title('Prediction results')
+#    plt.xlabel('date')
+#    plt.ylabel('price')
+#    plt.show() 
     
-    return fl,num,rmselist[index],maelist[index],mapelist[index],y_pred
+    return fl,num,y_pred_h1,y_pred_h2,y_pred_h3
 
 def arima_arimax(lag_dict,df,fl,step):
     lastkey = list(lag_dict.keys())[-1]
@@ -294,113 +334,148 @@ def arima_arimax(lag_dict,df,fl,step):
     print(len(newdf))
     
     size = len(newdf)-971
-    arima_y_train,arima_y_test = ARIMA_Y[:size-step+1],ARIMA_Y[size:]
-    exog_train,exog_test = newdf[:size-step+1],newdf[size-step+1:-step+1]
-#    exog_train,exog_test = newdf[:size-step+1],newdf[size-step+1:] #step=1
-    print(exog_test.shape)
-
-
-    arimax_index_list,arimax_rmse,arimax_mae,arimax_mape,arima_index_list,arima_rmse,arima_mae,arima_mape = [],[],[],[],[],[],[],[]
-    for i in range(1,5):
-        for j in range(3):
-            for k in range(1,5):
-                arimax = sm.tsa.statespace.SARIMAX(arima_y_train,order=(i,j,k),seasonal_order=(0,0,0,0),exog = exog_train,
-                                                   enforce_stationarity=False, enforce_invertibility=False).fit()
-                arima = sm.tsa.statespace.SARIMAX(arima_y_train,order=(i,j,k),seasonal_order=(0,0,0,0),exog = None,
-                                                  enforce_stationarity=False, enforce_invertibility=False).fit()
-                
-                arimax_pred = arimax.predict(size-step+1,len(newdf)-step,exog = exog_test,dynamic=True)[1:]
-                arimax_index_list.append((i,j,k))
-                arimax_rmse.append(RMSE(arima_y_test[1:],arimax_pred))
-                arimax_mae.append(MAE(arima_y_test[1:],arimax_pred))
-                arimax_mape.append(MAPE(arima_y_test[1:],arimax_pred))
-                
-                arima_pred = arima.predict(size-step+1,len(newdf)-step,exog = None,dynamic=True)[1:]
-                arima_index_list.append((i,j,k))
-                arima_rmse.append(RMSE(arima_y_test[1:],arima_pred))
-                arima_mae.append(MAE(arima_y_test[1:],arima_pred))
-                arima_mape.append(MAPE(arima_y_test[1:],arima_pred))
-                
-                print('ARIMAX:',(i,j,k))
     
-    arimax_rmse = np.array(arimax_rmse)
-    arimax_mae = np.array(arimax_mae)
-    arimax_mape = np.array(arimax_mape)            
-    newlistx = (arimax_rmse+arimax_mae+arimax_mape)/3 
-    newlistx = list(newlistx)
-    indexx = newlistx.index(min(newlistx))
+    if step == 0:
+        arima_y_train,arima_y_test = ARIMA_Y[:size-step],ARIMA_Y[size:]
+        print(len(arima_y_test))
+        exog_train,exog_test = newdf[:size-step],newdf[size-step:len(newdf)-step] #step=1 
+        print(exog_train.shape)
+        print(exog_test.shape)
+        arimax_index_list,arimax_rmse,arimax_mae,arimax_mape,arima_index_list,arima_rmse,arima_mae,arima_mape = [],[],[],[],[],[],[],[]
+        for i in range(1,5):
+            for j in range(3):
+                for k in range(1,5):
+                    arimax = sm.tsa.statespace.SARIMAX(arima_y_train,order=(i,j,k),seasonal_order=(0,0,0,0),exog = exog_train,
+                                                       enforce_stationarity=False, enforce_invertibility=False).fit()
+                    arima = sm.tsa.statespace.SARIMAX(arima_y_train,order=(i,j,k),seasonal_order=(0,0,0,0),exog = None,
+                                                      enforce_stationarity=False, enforce_invertibility=False).fit()
+                    
+                    arimax_pred = arimax.predict(size-step,size-step-1+971,exog = exog_test,dynamic=True)
+                    arimax_index_list.append((i,j,k))
+                    arimax_rmse.append(RMSE(arima_y_test,arimax_pred))
+                    arimax_mae.append(MAE(arima_y_test,arimax_pred))
+                    arimax_mape.append(MAPE(arima_y_test,arimax_pred))
+                    
+                    arima_pred = arima.predict(size-step,size-step-1+971,exog = None,dynamic=True)
+                    arima_index_list.append((i,j,k))
+                    arima_rmse.append(RMSE(arima_y_test,arima_pred))
+                    arima_mae.append(MAE(arima_y_test,arima_pred))
+                    arima_mape.append(MAPE(arima_y_test,arima_pred))
+                    
+                    print('ARIMAX:',(i,j,k))
+        
+        arimax_rmse = np.array(arimax_rmse)
+        arimax_mae = np.array(arimax_mae)
+        arimax_mape = np.array(arimax_mape)            
+        newlistx = (arimax_rmse+arimax_mae+arimax_mape)/3 
+        newlistx = list(newlistx)
+        indexx = newlistx.index(min(newlistx))
+        
+        arima_rmse = np.array(arima_rmse)
+        arima_mae = np.array(arima_mae)
+        arima_mape = np.array(arima_mape)
+        newlist =(arima_rmse+arima_mae+arima_mape)/3 
+        newlist = list(newlist)
+        index = newlist.index(min(newlist))
     
-    arima_rmse = np.array(arima_rmse)
-    arima_mae = np.array(arima_mae)
-    arima_mape = np.array(arima_mape)
-    newlist =(arima_rmse+arima_mae+arima_mape)/3 
-    newlist = list(newlist)
-    index = newlist.index(min(newlist))
+        arimax = sm.tsa.statespace.SARIMAX(arima_y_train,order=arimax_index_list[indexx],seasonal_order=(0,0,0,0),exog = exog_train,
+                                           enforce_stationarity=False, enforce_invertibility=False).fit()
+        arima = sm.tsa.statespace.SARIMAX(arima_y_train,order=arima_index_list[index],seasonal_order=(0,0,0,0),exog = None,
+                                          enforce_stationarity=False, enforce_invertibility=False).fit()
+        arimax_pred = arimax.predict(size-step,size-step-1+971,exog = exog_test,dynamic=True)
+        arima_pred = arima.predict(size-step,size-step-1+971,exog = None,dynamic=True)
+        
+        return arimax_pred,arimax_rmse[indexx],arimax_mae[indexx],arimax_mape[indexx],arimax_index_list[indexx],arima_pred,arima_rmse[index],arima_mae[index],arima_mape[index],arima_index_list[index]
     
-    arimax = sm.tsa.statespace.SARIMAX(arima_y_train,order=arimax_index_list[indexx],seasonal_order=(0,0,0,0),exog = exog_train,
-                                       enforce_stationarity=False, enforce_invertibility=False).fit()
-    arima = sm.tsa.statespace.SARIMAX(arima_y_train,order=arima_index_list[index],seasonal_order=(0,0,0,0),exog = None,
-                                      enforce_stationarity=False, enforce_invertibility=False).fit()
-    arimax_pred = arimax.predict(size-step,len(newdf)-step,exog = exog_test,dynamic=True)[1:]
-    arima_pred = arima.predict(size-step,len(newdf)-step,exog = None,dynamic=True)[1:]
+    else:
+        arima_y_train,arima_y_test = ARIMA_Y[:size-step],ARIMA_Y[size:]
+        print(len(arima_y_test))
+        exog_train,exog_test = newdf[:size-step],newdf[size-step:len(newdf)-step] #step=1    
+        print(exog_test.shape)
+        arimax = sm.tsa.statespace.SARIMAX(arima_y_train,order=(4,1,3),seasonal_order=(0,0,0,0),exog = exog_train,
+                                           enforce_stationarity=False, enforce_invertibility=False).fit()
+        arima = sm.tsa.statespace.SARIMAX(arima_y_train,order=(4,0,3),seasonal_order=(0,0,0,0),exog = None,
+                                          enforce_stationarity=False, enforce_invertibility=False).fit()
+        arimax_pred = arimax.predict(size-step,size-step-1+971,exog = exog_test,dynamic=True)
+        print(len(arimax_pred))
+        arima_pred = arima.predict(size-step,size-step-1+971,exog = None,dynamic=True)
+        print(len(arima_pred))
+        
+        arimax_rmse = RMSE(arima_y_test,arimax_pred)
+        arimax_mae = MAE(arima_y_test,arimax_pred)
+        arimax_mape = MAPE(arima_y_test,arimax_pred)
+        
+        arima_rmse = RMSE(arima_y_test,arima_pred)
+        arima_mae = MAE(arima_y_test,arima_pred)
+        arima_mape = MAPE(arima_y_test,arima_pred)
+        
+        return arimax_pred,arimax_rmse,arimax_mae,arimax_mape,arima_pred,arima_rmse,arima_mae,arima_mape
     
-    return arimax_pred,arimax_rmse[indexx],arimax_mae[indexx],arimax_mape[indexx],arimax_index_list[indexx],arima_pred,arima_rmse[index],arima_mae[index],arima_mape[index],arima_index_list[index]
+    
     
     
 if __name__ =='__main__':
     
-    dataset = pd.read_excel('D:/svrli_r_fulldata.xlsx')
+    dataset = pd.read_excel('D:/ByResearch/基于文本的原油油价预测/202007data/oil_r_fulldata.xlsx')
     
     mm = MinMaxScaler()
-    dataset['dDJI']  = mm.fit_transform(np.array(dataset['dDJI']).reshape(-1,1))
-    dataset['dUSDX']  = mm.fit_transform(np.array(dataset['dUSDX']).reshape(-1,1))
-    dataset['dWTI']  = mm.fit_transform(np.array(dataset['dWTI']).reshape(-1,1))
+#    dataset['dDJI']  = mm.fit_transform(np.array(dataset['dDJI']).reshape(-1,1))
+#    dataset['dUSDX']  = mm.fit_transform(np.array(dataset['dUSDX']).reshape(-1,1))
+#    dataset['dWTI']  = mm.fit_transform(np.array(dataset['dWTI']).reshape(-1,1))
     dataset['dprice']  = mm.fit_transform(np.array(dataset['dprice']).reshape(-1,1))
 #    dataset.to_excel('D:/plot_r.xlsx',index=False)
-#    lag_dict = {'topic1':7,'topic2':7,'topic3':7,'topic4':7,'polarity':8,'dprice':3} 
-    lag_dict = {'dDJI':3,'dUSDX':3,'dWTI':4,'t0pol':3,'t0su':3,'t0pz':3,
-                't0po':3,'t1pol':7,'t1su':7,'t1pz':3,'t1po':3,'dprice':3} 
-#    lag_dict = {'price': 3}  
+    lag_dict = {'topic1':7,'topic2':7,'topic3':7,'topic4':7,'polarity':7,'dprice':3} 
+#    lag_dict = {'dDJI':3,'dUSDX':3,'dWTI':4,'t0pol':3,'t0su':3,'t0pz':3,
+#                't0po':3,'t1pol':7,'t1su':7,'t1pz':3,'t1po':3,'dprice':3} 
+#    lag_dict = {'dprice': 4}  
     df,values,ta_X,ta_y,te_X,real_y = main_preprocess(dataset,lag_dict)
     
     rfc = RandomForestRegressor()
     svr = SVR(kernel='sigmoid',max_iter=100)
-    ada = AdaBoostRegressor(n_estimators=30,learning_rate=0.01)
-    model_list = [svr]
+    ada = AdaBoostRegressor(base_estimator = DecisionTreeRegressor(splitter="random",
+                                                                   max_depth=1,
+                                                                   min_samples_split=3),
+                            n_estimators=30,learning_rate=0.01)
+
+    model_list = [ada]
 
     pre_result = pd.DataFrame()
   
     for model in model_list:
-        fl,num_of_feature,min_rmse,min_mae,min_mape,pred = Regress(model,df,values,ta_X,ta_y,step=3) 
-        pre_result[str(model)[:3]+'test'] = pred
+        fl,num,y_pred_h1,y_pred_h2,y_pred_h3 = Regress(model,df,values,ta_X,ta_y) 
+        pre_result[str(model)[:3]+'-h1'] = y_pred_h1
+        pre_result[str(model)[:3]+'-h2'] = y_pred_h2
+        pre_result[str(model)[:3]+'-h3'] = y_pred_h3
         print('feature selected :',fl)
-        print('num of feature is {},min rmse is{},min mae is{},min mape is{}'.format(num_of_feature,min_rmse,min_mae,min_mape))
+        print('num of feature is {}, features are {}'.format(num, fl))
 
 # for ARIMA
-    fl = get_feature_num_arimax(values,df,ta_X,ta_y,step=3)
+    fl = get_feature_num_arimax(values,df,ta_X,ta_y)
     
     num = 0
     for i in fl:
         if i == True:
             num += 1
     print(num)
-            
-    arimax_pred,x_rmse,x_mae,x_mape,x_index,arima_pred,rmse,mae,mape,_index = arima_arimax(lag_dict,df,fl,step=3)
-
-
-    pre_result['arimax'],pre_result['arima'] = list(arimax_pred),list(arima_pred)
-    pre_result.to_excel('D:/pre_step3_svrli_oil.xlsx',index=False)
-
-
-
-
-
-#save training data and test data
+##    
+    arimax_pred,arimax_rmse,arimax_mae,arimax_mape,arima_pred,arima_rmse,arima_mae,arima_mape = arima_arimax(lag_dict,df,fl,step=1)       
+#    arimax_pred,x_rmse,x_mae,x_mape,x_index,arima_pred,rmse,mae,mape,_index = arima_arimax(lag_dict,df,fl,step=1)
+    pre_result['arimax_h1'],pre_result['arima_h1'] = list(arimax_pred),list(arima_pred)
+#    
+#    arimax_pred,arimax_rmse,arimax_mae,arimax_mape,arima_pred,arima_rmse,arima_mae,arima_mape = arima_arimax(lag_dict,df,fl,step=2)
+#    pre_result['arimax_h2'],pre_result['arima_h2'] = list(arimax_pred),list(arima_pred)
+##    
+#    arimax_pred,arimax_rmse,arimax_mae,arimax_mape,arima_pred,arima_rmse,arima_mae,arima_mape = arima_arimax(lag_dict,df,fl,step=3)
+#    pre_result['arimax_h3'],pre_result['arima_h3'] = list(arimax_pred),list(arima_pred)
+#    
+#    pre_result.to_excel('D:/ByResearch/基于文本的原油油价预测/20201019results/gold_result_no_text.xlsx',index=False)
+##
+##save training data and test data
 #train_X = pd.DataFrame(ta_X,columns=df.columns[:-1])  
 #train_Y = pd.DataFrame(ta_y,columns=['var6(t-0)'])
 #test_X = pd.DataFrame(te_X,columns=df.columns[:-1]) 
 #test_Y = pd.DataFrame(real_y,columns=['var6(t-0)'])
-
+#
 #train_X.to_excel('D:/train_X.xlsx',index=False)
 #train_Y.to_excel('D:/train_Y.xlsx',index=False)
 #test_X.to_excel('D:/test_X.xlsx',index=False)

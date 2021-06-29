@@ -27,7 +27,7 @@ n_docs = len(docs)
 n_terms = len(vocab)
 print('n_docs={}, n_terms={}'.format(n_docs, n_terms))
 
-tmp_folder = '202007'
+tmp_folder = 'seanmf_results/'
 if not os.access(tmp_folder, os.F_OK):
     os.mkdir(tmp_folder)
 

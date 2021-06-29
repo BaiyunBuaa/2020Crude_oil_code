@@ -8,7 +8,7 @@ from utils import *
 parser = argparse.ArgumentParser()
 parser.add_argument('--corpus_file', default='data/wedoc_term_mat.txt', help='term document matrix file')
 parser.add_argument('--vocab_file', default='data/wevocab.txt', help='vocab file')
-parser.add_argument('--par_file', default='202007/20200710W.txt', help='model results file')
+parser.add_argument('--par_file', default='seanmf_results/4W.txt', help='model results file')
 opt = parser.parse_args()
 
 docs = read_docs(opt.corpus_file)

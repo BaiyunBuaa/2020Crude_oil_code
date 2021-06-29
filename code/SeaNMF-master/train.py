@@ -13,8 +13,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--corpus_file', default='data/wedoc_term_mat.txt', help='term document matrix file')
 parser.add_argument('--vocab_file', default='data/wevocab.txt', help='vocab file')
 parser.add_argument('--model', default='seanmf', help='nmf | seanmf')
-parser.add_argument('--max_iter', type=int, default=10, help='max number of iterations')
-parser.add_argument('--n_topics', type=int, default=10, help='number of topics')
+parser.add_argument('--max_iter', type=int, default=500, help='max number of iterations')
+parser.add_argument('--n_topics', type=int, default=4, help='number of topics')
 parser.add_argument('--alpha', type=float, default=0.1, help='alpha')
 parser.add_argument('--beta', type=float, default=0.0, help='beta')
 parser.add_argument('--max_err', type=float, default=0.1, help='stop criterion')
@@ -47,8 +47,8 @@ if args.model.lower() == 'nmf':
         max_err=args.max_err)
     
     model.save_format(
-        Wfile=tmp_folder+'10W.txt',
-        Hfile=tmp_folder+'10H.txt')
+        Wfile=tmp_folder+'4W.txt',
+        Hfile=tmp_folder+'4H.txt')
     
 if args.model.lower() == 'seanmf':
     print('calculate co-occu·rance matrix')
@@ -91,6 +91,6 @@ if args.model.lower() == 'seanmf':
         fix_seed=args.fix_seed)
 
     model.save_format(
-        W1file=tmp_folder+'10W.txt',
-        W2file=tmp_folder+'10Wc.txt',
-        Hfile=tmp_folder+'10H.txt')
+        W1file=tmp_folder+'4W.txt',
+        W2file=tmp_folder+'4Wc.txt',
+        Hfile=tmp_folder+'4H.txt')

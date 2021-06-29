@@ -1,0 +1,70 @@
+n_topic=2
+Average PMI=-0.02807299631901848
+Topic 2:  -0.185897184422 gold futures prices u.s fed data dollar asia ahead gas 
+Topic 1:  0.129751191784 oil crude u.s futures data prices supply ahead opec higher 
+
+n_topic=3
+Average PMI=0.3781311517360788
+Topic 2:  -0.306549013103 gold futures u.s prices data fed gas dollar natural ahead 
+Topic 1:  0.145232063862 oil crude u.s data futures prices supply opec ahead lower 
+Topic 3:  1.29571040445 exclusive says energy new sources trump billion coal pipeline saudi 
+
+n_topic=4
+Average PMI=0.5482872152782774
+Topic 1:  0.165651493214 oil crude u.s prices data supply opec asia ahead gains 
+Topic 2:  0.232644162087 gold prices fed asia dollar u.s data ahead gains higher 
+Topic 4:  0.499142801363 futures gas natural u.s weekly outlook data low weather supply 
+Topic 3:  1.29571040445 exclusive says energy new sources trump billion coal pipeline saudi 
+
+n_topic=5
+Average PMI=0.4496730792038445
+Topic 3:  -0.142294073749 oil crude prices opec supply output asia higher lower futures 
+Topic 2:  0.159477861451 gold prices fed asia dollar ahead gains higher trade lower 
+Topic 4:  0.396043707235 u.s data crude ahead supply gains report falls jobs nymex 
+Topic 1:  0.570465648478 futures gas natural outlook weekly weather low high copper supply 
+Topic 5:  1.26467225261 exclusive says energy new sources trump billion coal pipeline deal 
+
+n_topic=6
+Average PMI=0.5364742972307656
+Topic 3:  0.159477861451 gold prices fed dollar asia ahead gains higher trade lower 
+Topic 1:  0.222864367839 oil prices opec supply output crude lower higher iran cuts 
+Topic 4:  0.325900592778 u.s data supply ahead report gains jobs falls focus low 
+Topic 2:  0.570465648478 futures gas natural weekly outlook weather low copper high supply 
+Topic 6:  0.675465060233 crude asia nymex gains api china brent stocks falls early 
+Topic 5:  1.26467225261 exclusive says energy new sources trump billion coal pipeline deal 
+
+n_topic=7
+Average PMI=0.5430926264684828
+Topic 3:  0.159477861451 gold prices fed dollar asia ahead higher gains trade lower 
+Topic 4:  0.222864367839 oil prices opec supply output crude lower higher iran cuts 
+Topic 1:  0.325900592778 u.s data ahead supply report gains jobs falls focus low 
+Topic 6:  0.347762991807 preciousgold amid low high falls copper concerns fears hits drops 
+Topic 2:  0.570465648478 futures gas natural weekly outlook weather low copper high supply 
+Topic 5:  0.879466518476 crude asia nymex gains api china brent stocks early weaker 
+Topic 7:  1.29571040445 exclusive says energy sources trump new billion pipeline coal saudi 
+
+n_topic=8
+Average PMI=0.42021202952581677
+Topic 2:  0.0464388381064 gold fed dollar asia ahead gains futures higher trade lower 
+Topic 6:  0.0748582167346 prices asia gain fall rise dollar settle dip china higher 
+Topic 1:  0.0891101610075 oil opec supply output futures crude lower iran higher cuts 
+Topic 5:  0.325900592778 u.s data supply ahead report jobs gains focus falls low 
+Topic 3:  0.347762991807 preciousgold amid low falls high copper concerns fears hits drops 
+Topic 4:  0.570465648478 futures gas natural weekly outlook weather low copper high supply 
+Topic 7:  0.611449382845 crude asia nymex gains api china brent stocks higher early 
+Topic 8:  1.29571040445 exclusive says energy sources trump new billion pipeline coal saudi 
+
+n_topic=9
+Average PMI=0.4773803779137832
+Topic 6:  0.0321473627003 data ahead supply china gains focus storage wti weak copper 
+Topic 4:  0.134207728242 u.s report low high falls jobs rise near corn stocks 
+Topic 5:  0.159477861451 gold prices fed dollar asia gains higher trade ahead lower 
+Topic 9:  0.163931447964 preciousgold amid falls low high rises fears hits copper drops 
+Topic 1:  0.222864367839 oil prices opec supply output crude lower iran higher cuts 
+Topic 3:  0.527748123517 futures outlook weekly copper low silver grain high trade edge 
+Topic 7:  0.844238949269 crude asia nymex gains api brent stocks early weaker falls 
+Topic 2:  0.916097155791 gas natural weather forecasts supply storage prices gains warm mild 
+Topic 8:  1.29571040445 exclusive says energy sources trump new billion pipeline coal saudi 
+
+n_topic=10
+Average PMI=0.429635588134214

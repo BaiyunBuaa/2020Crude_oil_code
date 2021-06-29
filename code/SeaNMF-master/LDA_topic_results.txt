@@ -1,0 +1,80 @@
+n_topic=2
+Average PMI=-0.19818676396214036
+Topic 1:  -0.224894892024 oil crude u.s futures data prices supply ahead opec higher lower gains asia weekly nymex output outlook gas trade report 
+Topic 2:  -0.1714786359 gold futures prices u.s fed data dollar asia ahead gas natural gains trade higher high copper low outlook lower china 
+
+n_topic=3
+Average PMI=0.20101911156146487
+Topic 1:  -0.232660332001 oil crude u.s data futures prices supply opec ahead lower higher asia gains nymex output weekly outlook api concerns iran 
+Topic 2:  -0.185286552201 gold futures u.s prices data fed gas dollar natural ahead asia higher gains outlook trade high weekly low lower copper 
+Topic 3:  1.02100421889 exclusive says energy new sources trump billion coal pipeline saudi deal opec could minister steel venezuela canada iran fuel russia 
+
+n_topic=4
+Average PMI=0.2681044648268142
+Topic 1:  -0.0934167563305 oil crude u.s prices data supply opec asia ahead gains nymex lower higher output api iran falls concerns futures settle 
+Topic 2:  -0.0234636949899 gold prices fed asia dollar u.s data ahead gains higher trade lower focus china rate near amid high silver investors 
+Topic 4:  0.168294091741 futures gas natural u.s weekly outlook data low weather supply high copper storage higher forecasts trade rally grain lower focus 
+Topic 3:  1.02100421889 exclusive says energy new sources trump billion coal pipeline saudi deal opec could minister steel canada venezuela fuel iran russia 
+
+n_topic=5
+Average PMI=0.2088283039085669
+Topic 3:  -0.22411762327 oil crude prices opec supply output asia higher lower futures nymex iran settle concerns weekly gains trade api demand cuts 
+Topic 2:  -0.053511504217 gold prices fed asia dollar ahead gains higher trade lower rate focus amid near china silver high futures gain hike 
+Topic 4:  0.0561055129366 u.s data crude ahead supply gains report falls jobs nymex focus china low losses high rig upbeat inventory count weak 
+Topic 1:  0.244660915207 futures gas natural outlook weekly weather low high copper supply higher forecasts trade grain rally storage lower silver edge focus 
+Topic 5:  1.02100421889 exclusive says energy new sources trump billion coal pipeline deal saudi could minister opec steel canada fuel venezuela iran russia 
+
+n_topic=6
+Average PMI=0.28605599640031104
+Topic 3:  -0.00358415355413 gold prices fed dollar asia ahead gains higher trade lower rate focus amid near silver futures high china hike copper 
+Topic 1:  0.0108730821801 oil prices opec supply output crude lower higher iran cuts futures saudi wti deal cut rise concerns trade global amid 
+Topic 4:  0.13043071378 u.s data supply ahead report gains jobs falls focus low high losses upbeat lower weak stockpile sales inventory jobless rig 
+Topic 2:  0.244660915207 futures gas natural weekly outlook weather low copper high supply higher forecasts trade grain rally storage lower silver edge focus 
+Topic 6:  0.275647264723 crude asia nymex gains api china brent stocks falls early weaker higher build data ahead estimates eyed settle futures us 
+Topic 5:  1.05830815607 exclusive says energy new sources trump billion coal pipeline deal could saudi minister steel canada opec fuel venezuela chinas russia 
+
+n_topic=7
+Average PMI=0.29405763436623583
+Topic 3:  -0.053511504217 gold prices fed dollar asia ahead higher gains trade lower focus futures rate silver amid near china gain high hike 
+Topic 4:  0.0108730821801 oil prices opec supply output crude lower higher iran cuts futures saudi wti rise cut deal concerns trade global amid 
+Topic 1:  0.098708733247 u.s data ahead supply report gains jobs falls focus low high losses upbeat lower weak inventory stockpile sales jobless china 
+Topic 2:  0.244660915207 futures gas natural weekly outlook weather low copper high supply higher forecasts trade storage grain rally lower silver edge focus 
+Topic 5:  0.275647264723 crude asia nymex gains api china brent stocks early weaker higher falls build data futures ahead settle estimates eyed us 
+Topic 6:  0.406584638492 preciousgold amid low high falls copper concerns fears hits drops rises china update near rally dollar demand pct debt euro 
+Topic 7:  1.07544031093 exclusive says energy sources trump new billion pipeline coal saudi minister steel deal venezuela canada could chinas russia opec iran 
+
+n_topic=8
+Average PMI=0.2211147633360411
+Topic 6:  -0.206724187081 prices asia gain fall rise dollar settle dip china higher gas ease natural slip drop edge rebound hold demand highs 
+Topic 1:  -0.0620336144381 oil opec supply output futures crude lower iran higher cuts wti saudi deal cut concerns global trade ahead amid market 
+Topic 2:  -0.0194434674265 gold fed dollar asia ahead gains futures higher trade lower rate silver focus near high amid hike data investors copper 
+Topic 5:  0.098708733247 u.s data supply ahead report jobs gains focus falls low losses high upbeat lower weak stockpile inventory china sales jobless 
+Topic 4:  0.244660915207 futures gas natural weekly outlook weather low copper high supply forecasts higher storage grain trade rally lower silver edge focus 
+Topic 7:  0.275647264723 crude asia nymex gains api china brent stocks higher early weaker falls data build ahead estimates futures settle eyed us 
+Topic 3:  0.362662151525 preciousgold amid low falls high copper concerns fears hits drops china rises update demand rally pct near dollar debt record 
+Topic 8:  1.07544031093 exclusive says energy sources trump new billion pipeline coal saudi minister steel deal venezuela canada could chinas russia opec iran 
+
+n_topic=9
+Average PMI=0.2788830932402917
+Topic 5:  -0.0502800804944 gold prices fed dollar asia gains higher trade ahead lower rate focus amid gain near hike investors lows silver high 
+Topic 4:  0.0171639632609 u.s report low high falls jobs rise near corn stocks fall rig count focus crop drop wheat rises futures shale 
+Topic 6:  0.0498352828463 data ahead supply china gains focus storage wti weak copper inventory futures lower higher losses jobs bullish upbeat gdp api 
+Topic 1:  0.0529679849068 oil prices opec supply output crude lower iran higher cuts saudi wti cut deal rise global market amid concerns trade 
+Topic 3:  0.0680924618319 futures outlook weekly copper low silver grain high trade edge higher lower gold rally near crude wti concerns july focus 
+Topic 9:  0.376934495377 preciousgold amid falls low high rises fears hits copper drops concerns update rally pct dollar brexit record demand near debt 
+Topic 7:  0.440707135202 crude asia nymex gains api brent stocks early weaker falls higher build settle china estimates eyed us drop barrels rig 
+Topic 2:  0.4790862853 gas natural weather forecasts supply storage prices gains warm mild rally cold report high low focus higher futures temperatures bullish 
+Topic 8:  1.07544031093 exclusive says energy sources trump new billion pipeline coal saudi minister steel deal venezuela canada could chinas russia opec iran 
+
+n_topic=10
+Average PMI=0.23471217809709666
+Topic 6:  -0.279206459898 prices asia gain fall rise dollar settle china weekly dip higher edge outlook ease trade slip drop rebound lower hold 
+Topic 4:  0.0098525105507 gold fed dollar asia gains higher trade ahead lower rate focus amid near high hike silver lows investors falls minutes 
+Topic 9:  0.0171639632609 u.s report low jobs high falls rise fall corn stocks near rig drop count crop wheat futures focus shale rises 
+Topic 3:  0.0498352828463 data ahead supply china focus storage gains wti weak inventory copper futures jobs lower higher losses bullish upbeat gdp api 
+Topic 5:  0.0562592633919 oil opec supply output crude lower iran higher cuts saudi wti deal cut global amid market rises concerns trade demand 
+Topic 7:  0.082894482125 futures outlook weekly copper low silver grain high trade edge higher lower rally crude near fall wti july march concerns 
+Topic 1:  0.368230622388 crude asia nymex gains api brent stocks falls early weaker build higher estimates settle eyed us barrels china drop dips 
+Topic 10:  0.373886305942 preciousgold amid falls low high copper fears hits rises drops concerns update pct rally demand brexit record debt dollar brent 
+Topic 2:  0.592765499432 gas natural weather forecasts supply storage gains warm mild rally high report focus cold low futures higher temperatures bullish plunge 
+Topic 8:  1.07544031093 exclusive says energy sources trump new billion pipeline coal saudi minister steel deal venezuela canada could chinas russia opec iran 

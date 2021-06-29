@@ -76,7 +76,6 @@ def concat_feature(lag_dict,wedata):
         j+=1
     agg1 = pd.concat(frame,axis=1)
     
-    #删除当前时刻的文本特征
     for name in agg1.columns:
         if name != 'var6(t-0)':
             if '(t-0)' in name:
@@ -210,7 +209,6 @@ def get_feature_num_arimax(values,df,ta_X,ta_y): # using decision tree for arima
     num = newlist.index(min(newlist))+2
     return ChooseFeature(num,df,ta_X,ta_y)
     
-#这里也需要调整
 def Regress(model,df,values,ta_X,ta_y):
     rmselist = []
     maelist = []
@@ -416,7 +414,7 @@ def arima_arimax(lag_dict,df,fl,step):
     
 if __name__ =='__main__':
     
-    dataset = pd.read_excel('D:/ByResearch/基于文本的原油油价预测/202007data/oil_r_fulldata.xlsx')
+    dataset = pd.read_excel('/oil_r_fulldata.xlsx')
     
     mm = MinMaxScaler()
 #    dataset['dDJI']  = mm.fit_transform(np.array(dataset['dDJI']).reshape(-1,1))
@@ -468,7 +466,7 @@ if __name__ =='__main__':
 #    arimax_pred,arimax_rmse,arimax_mae,arimax_mape,arima_pred,arima_rmse,arima_mae,arima_mape = arima_arimax(lag_dict,df,fl,step=3)
 #    pre_result['arimax_h3'],pre_result['arima_h3'] = list(arimax_pred),list(arima_pred)
 #    
-#    pre_result.to_excel('D:/ByResearch/基于文本的原油油价预测/20201019results/gold_result_no_text.xlsx',index=False)
+#    pre_result.to_excel('/gold_result_no_text.xlsx',index=False)
 ##
 ##save training data and test data
 #train_X = pd.DataFrame(ta_X,columns=df.columns[:-1])  
@@ -480,17 +478,4 @@ if __name__ =='__main__':
 #train_Y.to_excel('D:/train_Y.xlsx',index=False)
 #test_X.to_excel('D:/test_X.xlsx',index=False)
 #test_Y.to_excel('D:/test_Y.xlsx',index=False)
-
-
-
-
-
-
-
-
-
-
-
-
-
 

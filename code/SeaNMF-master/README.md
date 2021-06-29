@@ -24,3 +24,6 @@ This the implementation of the paper
 #### Evaluation
 
 - Run ```python3 vis_topic.py``` to calculate the PMI and visualize the top keywords in each topic.
+
+## Here I want to note sth.
+# The '''wedoc_term_mat.txt''' and 

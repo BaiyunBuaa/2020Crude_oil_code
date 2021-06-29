@@ -74,9 +74,3 @@ with open('D:/wedoc_term_mat.txt','w',encoding='utf-8') as f:
         l = str(new_data[i]).strip('[')
         r = l.strip(']')
         f.write(r+'\n')
-
-
-
-
-
-

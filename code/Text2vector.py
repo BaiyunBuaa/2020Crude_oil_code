@@ -32,7 +32,7 @@ def text_preprocession(Corpus):
     return CorpusList
 
 embeddings_index = {}
-f = open('D:/glove.6B.50d.txt',encoding = 'utf-8')
+f = open('/glove.6B.50d.txt',encoding = 'utf-8')
 for line in f:
     values = line.split(' ')
     word = values[0] ## The first entry is the word
@@ -42,7 +42,7 @@ f.close()
 
 print('GloVe data loaded')
 
-dataset = pd.read_excel('D:/ByResearch/基于文本的原油油价预测/20200615code/data/202007/senti_headlines.xlsx')
+dataset = pd.read_excel('/senti_headlines.xlsx')
 news_list = text_preprocession(dataset)
 
 MAX_NUM_WORDS = 2000
@@ -65,11 +65,11 @@ for l in data:
             break
     new_data.append(l)
 
-with open('D:/wedata.txt','w',encoding='utf-8') as f:
+with open('/wedata.txt','w',encoding='utf-8') as f:
     for i in range(len(news_list)):
         f.write(news_list[i]+'\n')
         
-with open('D:/wedoc_term_mat.txt','w',encoding='utf-8') as f:
+with open('/wedoc_term_mat.txt','w',encoding='utf-8') as f:
     for i in range(len(new_data)):
         l = str(new_data[i]).strip('[')
         r = l.strip(']')

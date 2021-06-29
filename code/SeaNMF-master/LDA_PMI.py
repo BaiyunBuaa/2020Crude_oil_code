@@ -14,12 +14,11 @@ from gensim.corpora.dictionary import Dictionary
 
 def get_train(path1):
     f = open(path1)
-    #读取全部内容
     lines = f.readlines()  #lines在这里是一个list
     return lines 
 
 def main():
-    docs = get_train('D:/ByResearch/基于文本的原油油价预测/20200615code/code/SeaNMF-master/data/wedata.txt')
+    docs = get_train('/data/wedata.txt')
     docs = [s.strip().split() for s in docs]
     
     # Create a dictionary representation of the documents.
@@ -48,31 +47,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-    PMI_LDA = [-1.1249,-1.3806,-2.3789,-1.6854,-2.6971,-2.2079,-2.5428,-3.1219,-3.8324]
-    PMI_NMF = [-0.0281,0.3781,0.5483,0.4497,0.5365,0.5431,0.4202,0.4774,0.4296]
-    
-    plt.figure(figsize=(6, 4))
-    plt.grid(c='grey',ls='--')
-    plt.plot(range(2,11),PMI_LDA,'blue',label='PMI_LDA')
-    plt.plot(range(2,11),PMI_NMF,'black',label='PMI_seaNMF')
-    plt.title('Fluctuation of PMI score with the number of topics')
-    plt.xlabel('Num of topics (k)')
-    plt.ylabel('PMI')
-    plt.legend()
-    plt.rcParams['savefig.dpi'] = 2000
-    plt.show()      
-
-
-
-
-
-
-
-
-
-
-
-
-
-

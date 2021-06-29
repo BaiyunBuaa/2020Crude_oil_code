@@ -30,6 +30,3 @@ for i in range(1,2213):
 
 csv_file.close()       
 driver.close()
-
-
-

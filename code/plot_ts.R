@@ -1,4 +1,3 @@
-#6ÌõÕÛÏßÍ¼
 new_data<-read_excel("D:/plot_r.xlsx")
 length(new_data$topic1)
 
@@ -23,9 +22,9 @@ plot_grid(plot.t1, plot.t2, plot.t3, plot.t4,
           plot.polarity, plot.dprice,
           nrow = 6, align = "v")
 
-#LDAºÍseanmf¶Ô±È
-sea <- c(0.1124,0.3624,0.6837,0.5339,0.6112,0.2780,0.5090,0.4507,0.4745)
-lda <- c(-1.1249,-1.3806,-2.3789,-1.6854,-2.69?1,-2.2079,-2.5428,-3.1219,-3.8324)
+#LDAå’Œseanmfå¯¹æ¯”
+sea <- c(-0.0281,0.3781,0.5483,0.4497,0.5365,0.5431,0.4202,0.4774,0.4296)
+lda <- c(-0.1982,0.2020,0.2681,0.2088,0.2861,0.2941,0.2211,0.2789,0.2347)
 x <- c(2,3,4,5,6,7,8,9,10)
 topic_data <- data.frame(x,lda,sea)
 
@@ -36,8 +35,7 @@ ggplot(topic_data)+
   labs(x="Number of topics(k)",y="PMI",color = 'Topic Model')+
   scale_color_manual(values = c("LDA" = "black","SeaNMF" = "blue"))
 
-####Ä£ĞÍÌáÉıÍ¼
-#Ô­ÓÍ
+
 rf1x <- c('no text','textblob','our method')
 rf1x <- factor?rf1x,levels=c('no text','textblob','our method'))
 rf1rmse <- c(0.0743,0.0614,0.0614)
@@ -233,7 +231,7 @@ library(showtext)
 plot_grid(rf1,rf2,rf3,svr1,svr2,svr3,arima1,arima2,arima3,ada1,ada2,ada3,
           nrow = 4, ncol=3, align = "v")
 
-#ÌìÈ»Æø
+#å¤©ç„¶æ°”
 rf1x <- c('no text','our method')
 rf1x?<- factor(rf1x,levels=c('no text','our method'))
 rf1rmse <- c(0.0642,0.0583)
@@ -431,7 +429,7 @@ library(showtext)
 plot_grid?rf1,rf2,rf3,svr1,svr2,svr3,arima1,arima2,arima3,ada1,ada2,ada3,
           nrow = 4, ncol=3, align = "v")
 
-#»Æ½ğ
+#é»„é‡‘
 rf1x <- c('no text','our method')
 rf1x <- factor(rf1x,levels=c('no text','our method'))
 rf1rmse <- c(0.0567,0.0468)

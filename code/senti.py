@@ -12,7 +12,7 @@ import math
 #Create two new lists to store polarity scores and subjective scores
 polarity_list = []
 subject_list = []
-raw_data = pd.read_excel('D:/ByResearch/基于文本的原油油价预测/20200615code/data/202007/senti_headlines.xlsx')
+raw_data = pd.read_excel('/senti_headlines.xlsx')
 for sen in raw_data['headlines']:
     testimonial = TextBlob(sen)
     polarity_list.append(testimonial.sentiment.polarity)
@@ -34,6 +34,5 @@ for i in range(len(polarity_list)):
 #Save two scores in Excel
 raw_data['polarity'] = cucum_senti
 
-raw_data.to_excel('D:/ByResearch/基于文本的原油油价预测/20200615code/data/202007/new_senti_headlines.xlsx',index = False)
-    
+raw_data.to_excel('/new_senti_headlines.xlsx',index = False)
     

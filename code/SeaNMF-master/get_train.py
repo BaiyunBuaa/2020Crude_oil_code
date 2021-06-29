@@ -1,8 +1,6 @@
 def get_train(path1,path2):
     f = open(path1)
-    #读取全部内容
-    lines = f.readlines()  #lines在这里是一个list
-    #获取行数
+    lines = f.readlines()
     nums = len(lines)
 
     with open(path2,'w') as ff:

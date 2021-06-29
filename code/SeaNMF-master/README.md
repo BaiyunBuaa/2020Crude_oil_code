@@ -26,4 +26,5 @@ This the implementation of the paper
 - Run ```python3 vis_topic.py``` to calculate the PMI and visualize the top keywords in each topic.
 
 ## Here I want to note sth.
-# The '''wedoc_term_mat.txt''' and 
+- The two files ```wedoc_term_mat.txt``` and ```wevocab.txt``` are from the python file ```Text2vector.py```. In this file, we conducted some complex preprocessing steps on the text data and used Glove to convert the text into vector. However, the original file ```Text2vector.py``` was lost unfortunately. So I rewritted the codes but generated some slight changes to the original codes. As a result, if you may not get the same results as me, please feel relax. Just get familar with this forecasting framework.
+- I have tried my best to search for the history records of my codes, and found something maybe useful for you. Please feel free to use the ```4H```,```4W```,and ```4Wc``` under ```data``` fold directly, because these three files are correct. I have uploaded my topic results of LDA model and SeaNMF model separately for your convenience.

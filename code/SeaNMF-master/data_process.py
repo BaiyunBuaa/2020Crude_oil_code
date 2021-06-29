@@ -6,9 +6,9 @@ import argparse
 from utils import *
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--text_file', default='data/their_data.txt', help='input text file')
-parser.add_argument('--corpus_file', default='data/their_noglove_doc_term_mat.txt', help='term document matrix file')
-parser.add_argument('--vocab_file', default='data/their_noglove_vocab.txt', help='vocab file')
+parser.add_argument('--text_file', default='data/wedata.txt', help='input text file')
+parser.add_argument('--corpus_file', default='data/wedoc_term_mat.txt', help='term document matrix file')
+parser.add_argument('--vocab_file', default='data/wevocab.txt', help='vocab file')
 parser.add_argument('--vocab_max_size', type=int, default=2000, help='maximum vocabulary size')
 parser.add_argument('--vocab_min_count', type=int, default=3, help='minimum frequency of the words')
 args = parser.parse_args()

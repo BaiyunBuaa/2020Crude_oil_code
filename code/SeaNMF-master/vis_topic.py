@@ -44,5 +44,3 @@ for k in index:
     for w in np.argsort(W[:,k])[::-1][:n_topKeyword]:
         print(vocab[w], end=' ')
     print()
-
-#PMI = [0.1124,0.3624,0.6837,0.5339,0.6112,0.2780,0.5090,0.4507,0.4745]

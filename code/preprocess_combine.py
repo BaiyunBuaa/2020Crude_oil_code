@@ -106,7 +106,7 @@ def oil_plot(df):
     plt.show()
 
 if __name__ == '__main__':
-    root = 'D:/ByResearch/基于文本的原油油价预测/20200615code/data/202007/'
+    root = '/data/202007/'
     f = open(root+'4H.txt','r',encoding='utf-8')
     news = pd.read_excel(root+'new_senti_headlines.xlsx')
     grouped = H2prob(f,news)
@@ -122,7 +122,6 @@ if __name__ == '__main__':
     P = full_hp(p_grouped)
     O = full_hp(o_grouped)
     
-    # 一审修改意见中要求去掉hp平滑，上面hp函数已经删除平滑功能
     
     fulldata = pd.concat([H,P,O],axis = 1)
     
